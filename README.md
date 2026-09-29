@@ -20,9 +20,34 @@ git clone https://github.com/Splendus/aai-2627.git
 cd aai-2627
 ```
 
-- **Linux:** install `git` with your package manager if it isn't already there.
-- **macOS:** the first `git` command may offer to install the *Command Line Tools*. Accept, and wait for the installation to finish.
-- **Windows:** install [Git for Windows](https://git-scm.com/downloads/win), or run `winget install Git.Git`.
+If you do not already have `git` installed:
+
+### **Linux:** install `git` with your package manager if it isn't already there.
+
+If you’re on a Debian-based distribution, such as Ubuntu:
+
+```sh
+sudo apt install git-all
+```
+
+If you’re on Fedora, you can use:
+
+```sh
+sudo dnf install git-all
+```
+
+
+### **macOS:** 
+
+Simply type 
+```sh
+git
+```
+in a shell and it should offer to install the *Command Line Tools*. Accept, and wait for the installation to finish.
+
+### **Windows:** 
+
+install [Git for Windows](https://git-scm.com/downloads/win), or run `winget install Git.Git`.
 
 **Option B: ZIP.** On the repository page, click *Code → Download ZIP* and unpack it. You won't get updates automatically, so download the new notebooks each week.
 
