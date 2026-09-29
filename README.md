@@ -1,10 +1,10 @@
 # Applied AI in Python — WS 2026/27
 
 Course material for *Applied AI in Python* (University of Salzburg).
-New notebooks and problem sheets are added here before each session.
+New notebooks and problem sheets are added here during the semester.
 
 ```text
-notebooks/   lecture notebooks and scripts, released session by session
+lectures/   lecture notebooks and scripts, released session by session
 sheets/      problem sheets
 project/     project guidelines
 data/        small datasets used in the notebooks
@@ -55,7 +55,7 @@ install [Git for Windows](https://git-scm.com/downloads/win), or run `winget ins
 
 The download is about 1 GB, mostly PyTorch.
 
-### Route 1: uv (recommended)
+### uv (recommended)
 
 [uv](https://docs.astral.sh/uv/) installs the right Python version and all packages in exactly the versions we use in class, on every operating system.
 
@@ -80,7 +80,7 @@ uv run jupyter lab # starts Jupyter in your browser
 
 **VS Code:** open the course directory and choose the `.venv` environment as the kernel ("Select Kernel" at the top right of a notebook).
 
-### Route 2: venv + pip (if uv does not work on your machine)
+### Alternative: venv + pip (if uv does not work on your machine)
 
 First install **Python 3.13** from [python.org](https://www.python.org/downloads/). On Windows, the "install for me only" option needs no admin rights. Then, inside the course directory:
 
@@ -112,12 +112,12 @@ This installs the last PyTorch version for Intel Macs. With Route 2, install Pyt
 
 ## 3. Working with the notebooks
 
-- **Don't edit the notebooks in `notebooks/` directly.** Copy them to `work/` first and work on the copy. Otherwise `git pull` refuses to update the files you have changed.
+- **Don't edit the notebooks in `lectures/` directly.** Copy them to `work/` first and work on the copy. Otherwise `git pull` refuses to update the files you have changed.
 - **Getting updates** (Option A):
 
   ```sh
   git pull
-  uv sync      # Route 2 instead: .venv/bin/python -m pip install -r requirements.txt
+  uv sync      # or use venv+pip instead: .venv/bin/python -m pip install -r requirements.txt
   ```
 
 ## 4. Optional: Graphviz (from the autograd sessions on)
@@ -133,7 +133,7 @@ Some notebooks draw computation graphs, which needs the Graphviz program. Withou
 | Problem | Try |
 | --- | --- |
 | `uv: command not found` right after installing | Open a new terminal. |
-| The uv installer is blocked (Windows) | `winget install astral-sh.uv`, or use Route 2. |
+| The uv installer is blocked (Windows) | `winget install astral-sh.uv`, or use a python venv. |
 | `uv sync` cannot download Python (e.g. behind a proxy) | Install Python 3.13 from python.org, then run `uv sync --no-managed-python`. |
 | Jupyter doesn't list the course environment | Start Jupyter via `uv run jupyter lab`, or select `.venv` as the kernel in VS Code. |
 | Anything else | Bring your laptop to the session or send me an email. |
