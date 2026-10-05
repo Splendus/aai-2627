@@ -107,13 +107,12 @@ You don't need to "activate" the environment. Calling the programs inside `.venv
 
 ### Intel Macs (bought before 2021)
 
-PyTorch no longer supports Intel Macs with Python 3.13. Run this **once** before `uv sync`:
+PyTorch no longer supports Intel Macs with Python 3.13. Run this **once** and install Python **3.12** instead of 3.13 before `uv sync`:
 
 ```sh
 uv python pin 3.12
 ```
 
-This installs the last PyTorch version for Intel Macs. With Route 2, install Python **3.12** instead of 3.13.
 
 ## 3. Working with the notebooks
 
