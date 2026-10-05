@@ -3,6 +3,8 @@
 Course material for *Applied AI in Python* (University of Salzburg).
 New notebooks and problem sheets are added here during the semester.
 
+Lecturer: Dominik Geng, <dominik.geng@plus.ac.at>
+
 ```text
 lectures/   lecture notebooks and scripts, released session by session
 sheets/      problem sheets
@@ -136,4 +138,4 @@ Some notebooks draw computation graphs, which needs the Graphviz program. Withou
 | The uv installer is blocked (Windows) | `winget install astral-sh.uv`, or use a python venv. |
 | `uv sync` cannot download Python (e.g. behind a proxy) | Install Python 3.13 from python.org, then run `uv sync --no-managed-python`. |
 | Jupyter doesn't list the course environment | Start Jupyter via `uv run jupyter lab`, or select `.venv` as the kernel in VS Code. |
-| Anything else | Bring your laptop to the session or send me an email. |
+| Anything else | Bring your laptop to the session or send me an email (<dominik.geng@plus.ac.at>). |
