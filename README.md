@@ -5,12 +5,15 @@ New notebooks and problem sheets are added here during the semester.
 
 Lecturer: Dominik Geng, <dominik.geng@plus.ac.at>
 
+Organization, assessment and attendance: see the [syllabus](syllabus.pdf).
+
 ```text
-lectures/   lecture notebooks and scripts, released session by session
-sheets/      problem sheets
-project/     project guidelines
-data/        small datasets used in the notebooks
-work/        YOUR copies of notebooks (you create this directory; git ignores it)
+syllabus.pdf  organization, assessment and attendance
+lectures/     lecture notebooks and scripts, released session by session
+sheets/       problem sheets
+project/      project guidelines
+data/         small datasets used in the notebooks
+work/         YOUR copies of notebooks (you create this directory; git ignores it)
 ```
 
 ## 1. Get the material
