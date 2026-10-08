@@ -18,7 +18,7 @@ git clone https://github.com/Splendus/aai-2627.git
 cd aai-2627
 ```
 
-If you don't have git yet, the repository's README explains how to install it. Alternatively, download the repository as a ZIP file (*Code → Download ZIP* on the repository page) and unpack it. In that case, you have to download new material again each week.
+If you don't have git yet, the repository's README explains how to install it. Alternatively, download the repository as a ZIP file (*Code → Download ZIP* on the repository page) and unpack it. The unpacked folder is called `aai-2627-main`, and Windows' *Extract All* even nests it twice (`aai-2627-main\aai-2627-main`). Take the inner folder, the one that directly contains `pyproject.toml`, and rename it to `aai-2627`, so that all commands in this guide work as written. In that case, you have to download new material again each week.
 
 The repository is organized as follows:
 
@@ -33,6 +33,8 @@ work/       YOUR copies of notebooks (you create this directory; git ignores it)
 Some of these folders only appear once their first material has been released.
 
 ## 2 - Install uv
+
+**On the university's lab PCs, uv doesn't work** (their security software blocks it). There, follow the section [University lab PCs (Windows)](#university-lab-pcs-windows) below instead of steps 2–4. Steps 2–4 are for your own computer.
 
 Install uv with the command for your operating system, then **open a new terminal**, so that the `uv` command is found:
 
@@ -60,9 +62,9 @@ Inside the course directory (`aai-2627`), run
 uv sync
 ```
 
-This reads the files `pyproject.toml` and `uv.lock` of the repository, downloads Python 3.13 if needed, and installs all packages we need for the course into a folder `.venv` inside the course directory: numpy, pandas, matplotlib, scikit-learn, seaborn, Jupyter and PyTorch. Unlike conda, there is no environment to create, name or activate: the environment *is* the `.venv` folder of the project, and `uv run <command>` runs a command inside it.
+This reads the files `pyproject.toml` and `uv.lock` of the repository, downloads a suitable Python version if needed (currently 3.13), and installs all packages we need for the course into a folder `.venv` inside the course directory: numpy, pandas, matplotlib, scikit-learn, seaborn, Jupyter and PyTorch. Unlike conda, there is no environment to create, name or activate: the environment *is* the `.venv` folder of the project, and `uv run <command>` runs a command inside it.
 
-**Intel Macs (bought before 2021):** PyTorch no longer supports Intel Macs with Python 3.13. Run `uv python pin 3.12` once *before* `uv sync`.
+**Intel Macs (bought before 2021):** PyTorch no longer supports Intel Macs with Python 3.13 or newer. Run `uv python pin 3.12` once *before* `uv sync`.
 
 To verify your setup, run
 
@@ -90,6 +92,33 @@ uv run jupyter lab
 This starts Jupyter's web editor in your browser. If it does not open on its own, copy & paste the link shown in the terminal into your browser. If you prefer the classic interface, use `uv run jupyter notebook` instead.
 
 Create a folder `work/` in the course directory for your own notebooks. Don't edit the notebooks in `lectures/` directly: copy them to `work/` first. Otherwise `git pull` refuses to update the files you have changed.
+
+## University lab PCs (Windows)
+
+On the lab PCs, the security software blocks the small launcher programs that uv creates, so we use the preinstalled Python 3.14 instead, which works with all our packages. git isn't installed there either:
+
+1. Download the material as a ZIP (see step 1) and save the inner folder as `C:\Users\<your id>\aai-2627`, i.e. directly in your user folder, renamed without `-main`.
+2. Open PowerShell and create the environment (installing takes a few minutes):
+
+   ```powershell
+   cd $env:USERPROFILE\aai-2627
+   python -m venv .venv
+   .venv\Scripts\python -m pip install -r requirements.txt
+   ```
+
+3. Verify the setup:
+
+   ```powershell
+   .venv\Scripts\python -c "import sys, numpy, pandas, matplotlib, sklearn, torch; print('Python', sys.version.split()[0], '| torch', torch.__version__, '| setup complete')"
+   ```
+
+4. Launch Jupyter:
+
+   ```powershell
+   .venv\Scripts\python -m jupyterlab
+   ```
+
+Always start programs this way, via `.venv\Scripts\python -m ...`. Launchers like `jupyter.exe`, `jupyter lab` (with a space) or `uv run` are blocked on these PCs ("Zugriff verweigert" / "Access denied"). The environment stays on the PC when you log out, so you only have to install it once per PC; next time, steps 2 (only the `cd` line) and 4 are enough.
 
 ## Alternative: IDE
 

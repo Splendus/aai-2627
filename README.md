@@ -54,7 +54,7 @@ in a shell and it should offer to install the *Command Line Tools*. Accept, and 
 
 install [Git for Windows](https://git-scm.com/downloads/win), or run `winget install Git.Git`.
 
-**Option B: ZIP.** On the repository page, click *Code → Download ZIP* and unpack it. You won't get updates automatically, so download the new notebooks each week.
+**Option B: ZIP.** On the repository page, click *Code → Download ZIP* and unpack it. The unpacked folder is called `aai-2627-main`, and Windows' *Extract All* even nests it twice (`aai-2627-main\aai-2627-main`). Take the inner folder, the one that directly contains `pyproject.toml`, and rename it to `aai-2627`, so that all commands below work as written. You won't get updates automatically, so download the new notebooks each week.
 
 ## 2. Set up Python
 
@@ -79,7 +79,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 Then, inside the course directory:
 
 ```sh
-uv sync            # downloads Python 3.13 and all packages into .venv/
+uv sync            # downloads a suitable Python and all packages into .venv/
 uv run jupyter lab # starts Jupyter in your browser
 ```
 
@@ -87,27 +87,40 @@ uv run jupyter lab # starts Jupyter in your browser
 
 ### Alternative: venv + pip (if uv does not work on your machine)
 
-First install **Python 3.13** from [python.org](https://www.python.org/downloads/). On Windows, the "install for me only" option needs no admin rights. Then, inside the course directory:
+First install **Python 3.13 or 3.14** from [python.org](https://www.python.org/downloads/) (Intel Macs: 3.12). On Windows, the "install for me only" option needs no admin rights. Then, inside the course directory (replace `3.14` by the version you installed):
 
 ```sh
 # macOS / Linux
-python3.13 -m venv .venv
+python3.14 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-.venv/bin/jupyter lab
+.venv/bin/python -m jupyterlab
 ```
 
 ```powershell
 # Windows
-py -3.13 -m venv .venv
+py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\jupyter lab
+.venv\Scripts\python -m jupyterlab
 ```
 
 You don't need to "activate" the environment. Calling the programs inside `.venv` directly also works on Windows machines that block activation scripts.
 
+### University lab PCs (Windows)
+
+On the lab PCs, uv can't be used: their security software blocks the small launcher programs that uv creates. Use the preinstalled Python 3.14 instead, which works with our packages. git isn't installed there either, so download the material as a ZIP (see option B above) to `C:\Users\<your id>\aai-2627`. Then, in PowerShell:
+
+```powershell
+cd $env:USERPROFILE\aai-2627
+python -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m jupyterlab
+```
+
+Always start programs this way, via `.venv\Scripts\python -m ...`. Launchers like `jupyter.exe` or `uv run` are blocked on these PCs ("Zugriff verweigert" / "Access denied"). The environment stays on the PC when you log out, so you only have to install it once per PC.
+
 ### Intel Macs (bought before 2021)
 
-PyTorch no longer supports Intel Macs with Python 3.13. Run this **once** and install Python **3.12** instead of 3.13 before `uv sync`:
+PyTorch no longer supports Intel Macs with Python 3.13 or newer. Run this **once** and install Python **3.12** instead of 3.13 before `uv sync`:
 
 ```sh
 uv python pin 3.12
@@ -140,4 +153,5 @@ Some notebooks draw computation graphs, which needs the Graphviz program. Withou
 | The uv installer is blocked (Windows) | `winget install astral-sh.uv`, or use a python venv. |
 | `uv sync` cannot download Python (e.g. behind a proxy) | Install Python 3.13 from python.org, then run `uv sync --no-managed-python`. |
 | Jupyter doesn't list the course environment | Start Jupyter via `uv run jupyter lab`, or select `.venv` as the kernel in VS Code. |
+| "Zugriff verweigert" / "Access denied" (os error 5) when running `python.exe`, `jupyter.exe` or `uv run` | Security software blocks launcher programs on this PC. Use the steps for the university lab PCs in section 2. |
 | Anything else | Bring your laptop to the session or send me an email (<dominik.geng@plus.ac.at>). |
